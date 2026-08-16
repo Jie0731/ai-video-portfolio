@@ -54,3 +54,8 @@
 
 /* V7 — true muted HTML5 autoplay where Google Drive direct delivery permits it */
 .video-fallback{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;text-align:center;padding:22px;background:radial-gradient(circle at 50% 35%,#252525,#101010 64%);color:#d8d8d2}.video-fallback svg{color:var(--accent)}.video-fallback strong{font:700 13px 'Manrope'}.video-fallback span{max-width:230px;color:#9f9f98;font-size:10px;line-height:1.5}.video-fallback a{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:8px 11px;border:1px solid #ffffff26;border-radius:999px;font-size:10px;color:#eee;background:#ffffff0d}.video-frame video::-webkit-media-controls-volume-slider,.video-frame video::-webkit-media-controls-mute-button{display:none!important}
+
+/* V9: inline Google Drive previews */
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#111;display:block;}
+.video-frame{position:relative;overflow:hidden;}
+.inline-note{pointer-events:none;z-index:4;}

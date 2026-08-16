@@ -84,7 +84,6 @@ function VideoCard({ video, index }) {
   const cardRef = useRef(null);
   const playerRef = useRef(null);
   const [mounted, setMounted] = useState(false);
-  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const el = playerRef.current;
@@ -94,7 +93,7 @@ function VideoCard({ video, index }) {
         setMounted(true);
         io.disconnect();
       }
-    }, { rootMargin: '500px 0px', threshold: 0.01 });
+    }, { rootMargin: '700px 0px', threshold: 0.01 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -114,30 +113,22 @@ function VideoCard({ video, index }) {
     el.style.setProperty('--ry', '0deg');
   };
 
+  const drivePreview = `https://drive.google.com/file/d/${video.id}/preview?autoplay=1&mute=1`;
+
   return (
     <article className="video-card reveal-card" ref={cardRef} onMouseMove={onMove} onMouseLeave={reset}
       style={{ '--delay': `${Math.min(index * 55, 220)}ms` }} data-reveal>
       <div className="video-frame" ref={playerRef}>
-        {mounted && !failed ? (
-          <video
-            src={video.file}
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-            preload="metadata"
-            onError={() => setFailed(true)}
+        {mounted ? (
+          <iframe
+            src={drivePreview}
+            title={video.title}
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            loading="eager"
           />
-        ) : failed ? (
-          <div className="video-fallback">
-            <Play size={28} fill="currentColor" />
-            <strong>Video file not found</strong>
-            <span>Add the matching MP4 inside public/videos. The player stays silent until the file exists.</span>
-            <a href={viewUrl(video.id)} target="_blank" rel="noreferrer">Open video <ExternalLink size={14}/></a>
-          </div>
         ) : (
-          <div className="video-loading"><Play size={24} fill="currentColor"/><span>Loading video…</span></div>
+          <div className="video-loading"><Play size={24} fill="currentColor"/><span>Loading preview…</span></div>
         )}
         <div className="inline-note"><span className="live-dot"/> AUTOPLAY · MUTED</div>
       </div>
@@ -148,6 +139,7 @@ function VideoCard({ video, index }) {
     </article>
   );
 }
+
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
   useReveal();
