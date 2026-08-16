@@ -14,3 +14,9 @@ Full replacement version for the existing Vercel/GitHub portfolio.
 Replace the existing repository contents with this folder, commit to `main`, and Vercel should redeploy automatically.
 
 Make sure all Google Drive videos remain set to **Anyone with the link → Viewer**.
+
+
+## V6 updates
+- Contact buttons: Email, WhatsApp, Telegram
+- Contact details shown directly in the contact section
+- All Google Drive embeds request autoplay + muted playback by default (`autoplay=1&mute=1`). Browser/Google Drive policies may still require user interaction.

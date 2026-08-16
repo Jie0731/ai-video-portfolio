@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowDown, ArrowUpRight, BarChart3, ExternalLink, Film, Moon,
-  Play, Sparkles, Sun, Volume2, WandSparkles, Scissors, MapPin
+  Play, Sparkles, Sun, Volume2, WandSparkles, Scissors, MapPin, Mail, MessageCircle, Send
 } from 'lucide-react';
 import './styles.css';
 
@@ -287,9 +287,15 @@ function App() {
           <span className="kicker">LET'S WORK</span>
           <h2>Need consistent AI videos<br/>without the production bottleneck?</h2>
           <p>Open to AI Video Creator, AI Video Editor, short-form creative, and ongoing content-production roles.</p>
-          <div className="contact-actions">
-            <a className="btn primary" href="#work"><Play size={16} fill="currentColor"/> Watch portfolio</a>
-            <a className="btn ghost" href={DRIVE_FOLDER} target="_blank" rel="noreferrer">Open Drive <ArrowUpRight size={16}/></a>
+          <div className="contact-actions contact-links">
+            <a className="btn primary" href="mailto:abasolajohnjerald@gmail.com"><Mail size={16}/> Email me</a>
+            <a className="btn ghost" href="https://wa.me/639205362516" target="_blank" rel="noreferrer"><MessageCircle size={16}/> WhatsApp</a>
+            <a className="btn ghost" href="https://t.me/Skwkekdkd" target="_blank" rel="noreferrer"><Send size={16}/> Telegram</a>
+          </div>
+          <div className="contact-details">
+            <a href="mailto:abasolajohnjerald@gmail.com">abasolajohnjerald@gmail.com</a>
+            <a href="https://wa.me/639205362516" target="_blank" rel="noreferrer">+63 920 536 2516</a>
+            <a href="https://t.me/Skwkekdkd" target="_blank" rel="noreferrer">@Skwkekdkd</a>
           </div>
           <div className="location"><MapPin size={14}/> Quezon City, Philippines</div>
         </div>
