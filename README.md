@@ -1,16 +1,16 @@
-# John Jerald AI Video Portfolio — V3
+# John Jerald AI Video Portfolio — V5
 
-Vercel-ready Vite + React portfolio.
+Full replacement version for the existing Vercel/GitHub portfolio.
 
-## Update existing live site
-Replace the files in your current GitHub `ai-video-portfolio` repository with the contents of this folder, then commit to `main`. Vercel will redeploy automatically.
+## V5 updates
+- Added circular profile portrait in the hero section.
+- Main intro headline now emphasizes 100M+ views generated across different platforms.
+- Preserves verified Facebook/YouTube analytics section.
+- Preserves section-by-section video categories: VSL, UGC, Pixar Style, Animation, Other AI Content.
+- Preserves inline Google Drive video players with muted-autoplay request.
+- Preserves light/dark mode and motion interactions.
 
-## Features
-- 13 inline-playable Google Drive videos
-- VSL / UGC / Pixar Style / Animation / Other AI Content filters
-- Light / dark theme toggle (saved in browser)
-- Smooth scroll reveal, hover motion, animated counters, marquee toolkit
-- Facebook + YouTube analytics screenshots
-- Mobile responsive
+## Deploy
+Replace the existing repository contents with this folder, commit to `main`, and Vercel should redeploy automatically.
 
-Google Drive/browser autoplay rules may still require a click on some devices. Every video remains playable directly in its portfolio card.
+Make sure all Google Drive videos remain set to **Anyone with the link → Viewer**.

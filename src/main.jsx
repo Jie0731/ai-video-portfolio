@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowDown, ArrowUpRight, BarChart3, ExternalLink, Film, Moon,
@@ -24,7 +24,14 @@ const videos = [
   { category: 'Other AI Content', title: 'AI Content Sample 05', id: '1lehYeYhwOZjUdCGYoN72kRvkr5HGBq7v' }
 ];
 
-const categories = ['All', 'VSL', 'UGC', 'Pixar Style', 'Animation', 'Other AI Content'];
+const categoryOrder = ['VSL', 'UGC', 'Pixar Style', 'Animation', 'Other AI Content'];
+const categoryInfo = {
+  'VSL': { eyebrow: 'VSL / DIRECT RESPONSE', title: 'VSL & Performance Ads', copy: 'AI-assisted sales and performance creatives built around hooks, product storytelling, pacing, and conversion-focused visual sequences.' },
+  'UGC': { eyebrow: 'UGC / SOCIAL ADS', title: 'AI UGC', copy: 'Creator-style vertical videos designed to feel native, conversational, realistic, and ready for TikTok, Reels, Shorts, and paid social.' },
+  'Pixar Style': { eyebrow: 'STYLIZED 3D', title: 'Pixar-Style AI Videos', copy: 'Polished character-driven 3D-style storytelling with consistent art direction, cinematic framing, expressive motion, and scene continuity.' },
+  'Animation': { eyebrow: 'ANIMATION', title: 'Animated AI Content', copy: 'Stylized animated sequences built with controlled character continuity, purposeful camera movement, and clear visual storytelling.' },
+  'Other AI Content': { eyebrow: 'EXPERIMENTAL / SHORT-FORM', title: 'Other AI Content', copy: 'A broader mix of AI-native short-form formats, visual concepts, faceless content, and creative experiments across different styles.' }
+};
 const tools = [
   ['Google Flow / Veo', Film], ['ChatGPT Image', Sparkles],
   ['Nano Banana / Gemini', WandSparkles], ['CapCut', Scissors], ['ElevenLabs', Volume2]
@@ -76,6 +83,22 @@ function Counter({ value, suffix = '', decimals = 0 }) {
 
 function VideoCard({ video, index }) {
   const cardRef = useRef(null);
+  const playerRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const el = playerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setMounted(true);
+        io.disconnect();
+      }
+    }, { rootMargin: '500px 0px', threshold: 0.01 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const onMove = e => {
     if (window.matchMedia('(pointer: coarse)').matches) return;
     const el = cardRef.current;
@@ -90,24 +113,23 @@ function VideoCard({ video, index }) {
     el.style.setProperty('--rx', '0deg');
     el.style.setProperty('--ry', '0deg');
   };
+
   return (
-    <article
-      className="video-card reveal-card"
-      ref={cardRef}
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-      style={{ '--delay': `${Math.min(index * 45, 260)}ms` }}
-      data-reveal
-    >
-      <div className="video-frame">
-        <iframe
-          src={previewUrl(video.id)}
-          title={video.title}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-        />
-        <div className="inline-note"><span className="live-dot"/> INLINE PLAYER</div>
+    <article className="video-card reveal-card" ref={cardRef} onMouseMove={onMove} onMouseLeave={reset}
+      style={{ '--delay': `${Math.min(index * 55, 220)}ms` }} data-reveal>
+      <div className="video-frame" ref={playerRef}>
+        {mounted ? (
+          <iframe
+            src={previewUrl(video.id)}
+            title={video.title}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            loading="eager"
+          />
+        ) : (
+          <div className="video-loading"><Play size={24} fill="currentColor"/><span>Loading video…</span></div>
+        )}
+        <div className="inline-note"><span className="live-dot"/> AUTO PLAY · MUTED</div>
       </div>
       <div className="video-meta">
         <div><span>{video.category}</span><h3>{video.title}</h3></div>
@@ -116,11 +138,8 @@ function VideoCard({ video, index }) {
     </article>
   );
 }
-
 function App() {
-  const [active, setActive] = useState('All');
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
-  const filtered = useMemo(() => active === 'All' ? videos : videos.filter(v => v.category === active), [active]);
   useReveal();
 
   useEffect(() => {
@@ -159,18 +178,25 @@ function App() {
       <section className="hero shell">
         <div className="hero-grid">
           <div>
-            <div className="eyebrow hero-in"><span className="dot"/> AVAILABLE FOR AI VIDEO WORK</div>
-            <h1 className="hero-in d1">AI video that looks<br/><span>made to be watched.</span></h1>
-            <p className="hero-copy hero-in d2">I’m John Jerald Abasola, an AI Video Creator & Video Editor focused on high-retention vertical content, realistic AI visuals, VSLs, UGC, animation, and fast production workflows.</p>
+            <div className="eyebrow hero-in"><span className="dot"/> AI VIDEO CREATOR & VIDEO EDITOR</div>
+            <h1 className="hero-in d1">Generated over <span>100 million views</span><br/>across different platforms.</h1>
+            <p className="hero-copy hero-in d2">I’m John Jerald Abasola. I create high-retention AI videos across VSL, UGC, animation, stylized 3D, and short-form formats — combining fast production with strong visual judgment and platform-native editing.</p>
             <div className="hero-actions hero-in d3">
               <a href="#work" className="btn primary"><Play size={16} fill="currentColor"/> Watch my work</a>
-              <a href="#results" className="btn ghost">See results <ArrowDown size={16}/></a>
+              <a href="#results" className="btn ghost">See verified results <ArrowDown size={16}/></a>
             </div>
           </div>
-          <div className="hero-orbit hero-in d2" aria-hidden="true">
-            <div className="orbit-ring ring-a"/><div className="orbit-ring ring-b"/>
-            <div className="orbit-core"><Play size={28} fill="currentColor"/></div>
-            <span className="orbit-tag tag-a">VSL</span><span className="orbit-tag tag-b">UGC</span><span className="orbit-tag tag-c">AI</span>
+          <div className="hero-profile hero-in d2">
+            <div className="profile-halo" aria-hidden="true"/>
+            <div className="profile-frame">
+              <img src="/assets/profile.png" alt="John Jerald Abasola" />
+            </div>
+            <div className="profile-caption">
+              <strong>John Jerald Abasola</strong>
+              <span>AI Video Creator · Video Editor</span>
+            </div>
+            <span className="profile-chip chip-a">160M+ Views</span>
+            <span className="profile-chip chip-b">AI Video</span>
           </div>
         </div>
         <div className="stats hero-in d4">
@@ -209,18 +235,34 @@ function App() {
         </div>
       </section>
 
-      <section id="work" className="work shell">
+      <section id="work" className="work portfolio-intro shell">
         <div className="section-head" data-reveal>
-          <div><span className="kicker">SELECTED WORK</span><h2>Play it right here.</h2></div>
-          <p>Every card is a real Google Drive video player. Click the player controls directly — no separate preview window needed.</p>
+          <div><span className="kicker">SELECTED WORK</span><h2>Work, separated by style.</h2></div>
+          <p>Each format has its own section so clients can immediately see the kind of AI video they need. Players load as you approach them and request muted autoplay.</p>
         </div>
-        <div className="filters" role="tablist" aria-label="Portfolio categories" data-reveal>
-          {categories.map(c => <button key={c} className={active === c ? 'active' : ''} onClick={() => setActive(c)}>{c}</button>)}
-        </div>
-        <div className="video-grid" key={active}>
-          {filtered.map((video, i) => <VideoCard key={video.id} video={video} index={i}/>) }
+        <div className="style-jump" data-reveal>
+          {categoryOrder.map((category, i) => <a key={category} href={`#style-${i+1}`}><span>0{i+1}</span>{category}</a>)}
         </div>
       </section>
+
+      <div className="portfolio-sections">
+        {categoryOrder.map((category, sectionIndex) => {
+          const info = categoryInfo[category];
+          const group = videos.filter(v => v.category === category);
+          return (
+            <section id={`style-${sectionIndex+1}`} className="style-section shell" key={category}>
+              <div className="style-heading" data-reveal>
+                <div className="style-index">0{sectionIndex + 1}</div>
+                <div className="style-title"><span className="kicker">{info.eyebrow}</span><h2>{info.title}</h2></div>
+                <p>{info.copy}</p>
+              </div>
+              <div className={`video-grid ${group.length === 2 ? 'two-up' : ''}`}>
+                {group.map((video, i) => <VideoCard key={video.id} video={video} index={i}/>) }
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
       <section className="workflow shell">
         <div className="section-head compact" data-reveal><div><span className="kicker">TOOLKIT</span><h2>AI-native workflow.</h2></div></div>
