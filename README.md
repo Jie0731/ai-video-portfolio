@@ -20,3 +20,7 @@ Make sure all Google Drive videos remain set to **Anyone with the link → Viewe
 - Contact buttons: Email, WhatsApp, Telegram
 - Contact details shown directly in the contact section
 - All Google Drive embeds request autoplay + muted playback by default (`autoplay=1&mute=1`). Browser/Google Drive policies may still require user interaction.
+
+
+## V7 video behavior
+Video cards use native HTML5 `<video>` elements with `autoplay`, `muted`, `loop`, and `playsInline`. This keeps autoplay silent by default. Google Drive can occasionally block direct delivery for some files; when that happens the card shows a silent fallback instead of starting audio.

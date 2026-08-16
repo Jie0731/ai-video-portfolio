@@ -36,7 +36,7 @@ const tools = [
   ['Google Flow / Veo', Film], ['ChatGPT Image', Sparkles],
   ['Nano Banana / Gemini', WandSparkles], ['CapCut', Scissors], ['ElevenLabs', Volume2]
 ];
-const previewUrl = id => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1`;
+const directVideoUrl = id => `https://drive.google.com/uc?export=download&id=${id}`;
 const viewUrl = id => `https://drive.google.com/file/d/${id}/view`;
 
 function useReveal() {
@@ -85,6 +85,7 @@ function VideoCard({ video, index }) {
   const cardRef = useRef(null);
   const playerRef = useRef(null);
   const [mounted, setMounted] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const el = playerRef.current;
@@ -118,18 +119,28 @@ function VideoCard({ video, index }) {
     <article className="video-card reveal-card" ref={cardRef} onMouseMove={onMove} onMouseLeave={reset}
       style={{ '--delay': `${Math.min(index * 55, 220)}ms` }} data-reveal>
       <div className="video-frame" ref={playerRef}>
-        {mounted ? (
-          <iframe
-            src={previewUrl(video.id)}
-            title={video.title}
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            loading="eager"
+        {mounted && !failed ? (
+          <video
+            src={directVideoUrl(video.id)}
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            preload="metadata"
+            onError={() => setFailed(true)}
           />
+        ) : failed ? (
+          <div className="video-fallback">
+            <Play size={28} fill="currentColor" />
+            <strong>Drive blocked direct autoplay</strong>
+            <span>This fallback stays silent until you choose to open it.</span>
+            <a href={viewUrl(video.id)} target="_blank" rel="noreferrer">Open video <ExternalLink size={14}/></a>
+          </div>
         ) : (
           <div className="video-loading"><Play size={24} fill="currentColor"/><span>Loading video…</span></div>
         )}
-        <div className="inline-note"><span className="live-dot"/> AUTO PLAY · MUTED</div>
+        <div className="inline-note"><span className="live-dot"/> AUTOPLAY · MUTED</div>
       </div>
       <div className="video-meta">
         <div><span>{video.category}</span><h3>{video.title}</h3></div>
