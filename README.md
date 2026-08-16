@@ -1,26 +1,32 @@
-# John Jerald AI Video Portfolio — V5
+# John Jerald AI Video Portfolio — V8
 
-Full replacement version for the existing Vercel/GitHub portfolio.
+## What changed
+- Portfolio is separated by video style: VSL, UGC, Pixar Style, Animation, Other AI Content.
+- Every portfolio video uses a native HTML5 `<video>` player.
+- Videos are configured with `autoplay`, `muted`, `loop`, and `playsInline`.
+- This avoids Google Drive iframe autoplay/audio limitations.
+- Light/dark mode, analytics proof, profile photo, animations, and contact links are retained.
 
-## V5 updates
-- Added circular profile portrait in the hero section.
-- Main intro headline now emphasizes 100M+ views generated across different platforms.
-- Preserves verified Facebook/YouTube analytics section.
-- Preserves section-by-section video categories: VSL, UGC, Pixar Style, Animation, Other AI Content.
-- Preserves inline Google Drive video players with muted-autoplay request.
-- Preserves light/dark mode and motion interactions.
+## REQUIRED: add your MP4 files
+Put the actual MP4 files in `public/videos/` with these exact filenames:
 
-## Deploy
-Replace the existing repository contents with this folder, commit to `main`, and Vercel should redeploy automatically.
+- `vsl-01.mp4`
+- `vsl-02.mp4`
+- `ugc-01.mp4`
+- `ugc-02.mp4`
+- `pixar-01.mp4`
+- `pixar-02.mp4`
+- `animation-01.mp4`
+- `animation-02.mp4`
+- `other-01.mp4`
+- `other-02.mp4`
+- `other-03.mp4`
+- `other-04.mp4`
+- `other-05.mp4`
 
-Make sure all Google Drive videos remain set to **Anyone with the link → Viewer**.
+Then upload/replace the full project in GitHub and commit. Vercel will redeploy automatically.
 
-
-## V6 updates
-- Contact buttons: Email, WhatsApp, Telegram
-- Contact details shown directly in the contact section
-- All Google Drive embeds request autoplay + muted playback by default (`autoplay=1&mute=1`). Browser/Google Drive policies may still require user interaction.
-
-
-## V7 video behavior
-Video cards use native HTML5 `<video>` elements with `autoplay`, `muted`, `loop`, and `playsInline`. This keeps autoplay silent by default. Google Drive can occasionally block direct delivery for some files; when that happens the card shows a silent fallback instead of starting audio.
+## Contact
+- Email: abasolajohnjerald@gmail.com
+- WhatsApp: +63 920 536 2516
+- Telegram: @Skwkekdkd

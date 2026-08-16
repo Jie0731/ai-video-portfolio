@@ -9,19 +9,19 @@ import './styles.css';
 const DRIVE_FOLDER = 'https://drive.google.com/drive/folders/15l2gHrabvn6R4Ae69L9eT3geuFIwk468?usp=drive_link';
 
 const videos = [
-  { category: 'VSL', title: 'VSL Sample 01', id: '1GLqA1hRecs-XjqSyxb2kSng664PDYG6Q' },
-  { category: 'VSL', title: 'VSL Sample 02', id: '1nspsNMSOdr7MF5ohEqLGW9YqASrPePv6' },
-  { category: 'UGC', title: 'UGC Sample 01', id: '1zt04Dx3ZGsJMkVro352P7ZnWBFHUZd5n' },
-  { category: 'UGC', title: 'UGC Sample 02', id: '1UrQSGRUrNPayrsrep45BrpKpyeBn9-e5' },
-  { category: 'Pixar Style', title: 'Pixar Style Sample 01', id: '1xKC2xl10wkNBldjHnKppH2c9mg1eqpZi' },
-  { category: 'Pixar Style', title: 'Pixar Style Sample 02', id: '1xnZo3fHo8OzVy3KpOd1x-Gz8vqJUglMC' },
-  { category: 'Animation', title: 'Animation Sample 01', id: '1QuCpoSCUfo7UgP6dZpkC05I12bk9To8Z' },
-  { category: 'Animation', title: 'Animation Sample 02', id: '1v881VFd8PExeN-yUC_wdcpUvThm6z266' },
-  { category: 'Other AI Content', title: 'AI Content Sample 01', id: '1IINS2LLsrddG8Z2ypjKtDFUd5JP0a4hS' },
-  { category: 'Other AI Content', title: 'AI Content Sample 02', id: '16mrRYBeGBTZqK2EZQvgZOAcwNvdJLAra' },
-  { category: 'Other AI Content', title: 'AI Content Sample 03', id: '1K1DFWAnZ6ifZrtXiYv95tRFzKMjXIZrl' },
-  { category: 'Other AI Content', title: 'AI Content Sample 04', id: '1H8zPxAMiXuP7tY8Gu1qPlxqbZTfUiZGf' },
-  { category: 'Other AI Content', title: 'AI Content Sample 05', id: '1lehYeYhwOZjUdCGYoN72kRvkr5HGBq7v' }
+  { category: 'VSL', title: 'VSL Sample 01', file: '/videos/vsl-01.mp4', id: '1GLqA1hRecs-XjqSyxb2kSng664PDYG6Q' },
+  { category: 'VSL', title: 'VSL Sample 02', file: '/videos/vsl-02.mp4', id: '1nspsNMSOdr7MF5ohEqLGW9YqASrPePv6' },
+  { category: 'UGC', title: 'UGC Sample 01', file: '/videos/ugc-01.mp4', id: '1zt04Dx3ZGsJMkVro352P7ZnWBFHUZd5n' },
+  { category: 'UGC', title: 'UGC Sample 02', file: '/videos/ugc-02.mp4', id: '1UrQSGRUrNPayrsrep45BrpKpyeBn9-e5' },
+  { category: 'Pixar Style', title: 'Pixar Style Sample 01', file: '/videos/pixar-01.mp4', id: '1xKC2xl10wkNBldjHnKppH2c9mg1eqpZi' },
+  { category: 'Pixar Style', title: 'Pixar Style Sample 02', file: '/videos/pixar-02.mp4', id: '1xnZo3fHo8OzVy3KpOd1x-Gz8vqJUglMC' },
+  { category: 'Animation', title: 'Animation Sample 01', file: '/videos/animation-01.mp4', id: '1QuCpoSCUfo7UgP6dZpkC05I12bk9To8Z' },
+  { category: 'Animation', title: 'Animation Sample 02', file: '/videos/animation-02.mp4', id: '1v881VFd8PExeN-yUC_wdcpUvThm6z266' },
+  { category: 'Other AI Content', title: 'AI Content Sample 01', file: '/videos/other-01.mp4', id: '1IINS2LLsrddG8Z2ypjKtDFUd5JP0a4hS' },
+  { category: 'Other AI Content', title: 'AI Content Sample 02', file: '/videos/other-02.mp4', id: '16mrRYBeGBTZqK2EZQvgZOAcwNvdJLAra' },
+  { category: 'Other AI Content', title: 'AI Content Sample 03', file: '/videos/other-03.mp4', id: '1K1DFWAnZ6ifZrtXiYv95tRFzKMjXIZrl' },
+  { category: 'Other AI Content', title: 'AI Content Sample 04', file: '/videos/other-04.mp4', id: '1H8zPxAMiXuP7tY8Gu1qPlxqbZTfUiZGf' },
+  { category: 'Other AI Content', title: 'AI Content Sample 05', file: '/videos/other-05.mp4', id: '1lehYeYhwOZjUdCGYoN72kRvkr5HGBq7v' }
 ];
 
 const categoryOrder = ['VSL', 'UGC', 'Pixar Style', 'Animation', 'Other AI Content'];
@@ -36,7 +36,6 @@ const tools = [
   ['Google Flow / Veo', Film], ['ChatGPT Image', Sparkles],
   ['Nano Banana / Gemini', WandSparkles], ['CapCut', Scissors], ['ElevenLabs', Volume2]
 ];
-const directVideoUrl = id => `https://drive.google.com/uc?export=download&id=${id}`;
 const viewUrl = id => `https://drive.google.com/file/d/${id}/view`;
 
 function useReveal() {
@@ -121,7 +120,7 @@ function VideoCard({ video, index }) {
       <div className="video-frame" ref={playerRef}>
         {mounted && !failed ? (
           <video
-            src={directVideoUrl(video.id)}
+            src={video.file}
             autoPlay
             muted
             loop
@@ -133,8 +132,8 @@ function VideoCard({ video, index }) {
         ) : failed ? (
           <div className="video-fallback">
             <Play size={28} fill="currentColor" />
-            <strong>Drive blocked direct autoplay</strong>
-            <span>This fallback stays silent until you choose to open it.</span>
+            <strong>Video file not found</strong>
+            <span>Add the matching MP4 inside public/videos. The player stays silent until the file exists.</span>
             <a href={viewUrl(video.id)} target="_blank" rel="noreferrer">Open video <ExternalLink size={14}/></a>
           </div>
         ) : (
