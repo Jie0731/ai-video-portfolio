@@ -1,10 +1,22 @@
-# John Jerald AI Video Portfolio — V9
+# John Jerald AI Video Portfolio — V5
 
-Full replacement version. Video cards use inline Google Drive previews configured to request autoplay while muted.
+Full replacement version for the existing Vercel/GitHub portfolio.
+
+## V5 updates
+- Added circular profile portrait in the hero section.
+- Main intro headline now emphasizes 100M+ views generated across different platforms.
+- Preserves verified Facebook/YouTube analytics section.
+- Preserves section-by-section video categories: VSL, UGC, Pixar Style, Animation, Other AI Content.
+- Preserves inline Google Drive video players with muted-autoplay request.
+- Preserves light/dark mode and motion interactions.
 
 ## Deploy
-1. Replace the existing repository files with everything in this folder.
-2. Commit to `main`.
-3. Vercel redeploys automatically.
+Replace the existing repository contents with this folder, commit to `main`, and Vercel should redeploy automatically.
 
-Note: Google Drive and browser autoplay policies can still override autoplay on some devices. For guaranteed muted autoplay, host the MP4 files directly under `public/videos` and use native HTML5 video.
+Make sure all Google Drive videos remain set to **Anyone with the link → Viewer**.
+
+
+## V6 updates
+- Contact buttons: Email, WhatsApp, Telegram
+- Contact details shown directly in the contact section
+- All Google Drive embeds request autoplay + muted playback by default (`autoplay=1&mute=1`). Browser/Google Drive policies may still require user interaction.

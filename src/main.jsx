@@ -6,22 +6,22 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const DRIVE_FOLDER = 'https://drive.google.com/drive/folders/15l2gHrabvn6R4Ae69L9eT3geuFIwk468?usp=drive_link';
+const FULL_PORTFOLIO = 'https://drive.google.com/drive/folders/1FNSgg_IGgOAbBfw2luzpZym3Q-DINi6S?usp=drive_link';
 
 const videos = [
-  { category: 'VSL', title: 'VSL Sample 01', file: '/videos/vsl-01.mp4', id: '1GLqA1hRecs-XjqSyxb2kSng664PDYG6Q' },
-  { category: 'VSL', title: 'VSL Sample 02', file: '/videos/vsl-02.mp4', id: '1nspsNMSOdr7MF5ohEqLGW9YqASrPePv6' },
-  { category: 'UGC', title: 'UGC Sample 01', file: '/videos/ugc-01.mp4', id: '1zt04Dx3ZGsJMkVro352P7ZnWBFHUZd5n' },
-  { category: 'UGC', title: 'UGC Sample 02', file: '/videos/ugc-02.mp4', id: '1UrQSGRUrNPayrsrep45BrpKpyeBn9-e5' },
-  { category: 'Pixar Style', title: 'Pixar Style Sample 01', file: '/videos/pixar-01.mp4', id: '1xKC2xl10wkNBldjHnKppH2c9mg1eqpZi' },
-  { category: 'Pixar Style', title: 'Pixar Style Sample 02', file: '/videos/pixar-02.mp4', id: '1xnZo3fHo8OzVy3KpOd1x-Gz8vqJUglMC' },
-  { category: 'Animation', title: 'Animation Sample 01', file: '/videos/animation-01.mp4', id: '1QuCpoSCUfo7UgP6dZpkC05I12bk9To8Z' },
-  { category: 'Animation', title: 'Animation Sample 02', file: '/videos/animation-02.mp4', id: '1v881VFd8PExeN-yUC_wdcpUvThm6z266' },
-  { category: 'Other AI Content', title: 'AI Content Sample 01', file: '/videos/other-01.mp4', id: '1IINS2LLsrddG8Z2ypjKtDFUd5JP0a4hS' },
-  { category: 'Other AI Content', title: 'AI Content Sample 02', file: '/videos/other-02.mp4', id: '16mrRYBeGBTZqK2EZQvgZOAcwNvdJLAra' },
-  { category: 'Other AI Content', title: 'AI Content Sample 03', file: '/videos/other-03.mp4', id: '1K1DFWAnZ6ifZrtXiYv95tRFzKMjXIZrl' },
-  { category: 'Other AI Content', title: 'AI Content Sample 04', file: '/videos/other-04.mp4', id: '1H8zPxAMiXuP7tY8Gu1qPlxqbZTfUiZGf' },
-  { category: 'Other AI Content', title: 'AI Content Sample 05', file: '/videos/other-05.mp4', id: '1lehYeYhwOZjUdCGYoN72kRvkr5HGBq7v' }
+  { category: 'VSL', title: 'VSL Sample 01', id: '1GLqA1hRecs-XjqSyxb2kSng664PDYG6Q' },
+  { category: 'VSL', title: 'VSL Sample 02', id: '1nspsNMSOdr7MF5ohEqLGW9YqASrPePv6' },
+  { category: 'UGC', title: 'UGC Sample 01', id: '1zt04Dx3ZGsJMkVro352P7ZnWBFHUZd5n' },
+  { category: 'UGC', title: 'UGC Sample 02', id: '1UrQSGRUrNPayrsrep45BrpKpyeBn9-e5' },
+  { category: 'Pixar Style', title: 'Pixar Style Sample 01', id: '1xKC2xl10wkNBldjHnKppH2c9mg1eqpZi' },
+  { category: 'Pixar Style', title: 'Pixar Style Sample 02', id: '1xnZo3fHo8OzVy3KpOd1x-Gz8vqJUglMC' },
+  { category: 'Animation', title: 'Animation Sample 01', id: '1QuCpoSCUfo7UgP6dZpkC05I12bk9To8Z' },
+  { category: 'Animation', title: 'Animation Sample 02', id: '1v881VFd8PExeN-yUC_wdcpUvThm6z266' },
+  { category: 'Other AI Content', title: 'AI Content Sample 01', id: '1IINS2LLsrddG8Z2ypjKtDFUd5JP0a4hS' },
+  { category: 'Other AI Content', title: 'AI Content Sample 02', id: '16mrRYBeGBTZqK2EZQvgZOAcwNvdJLAra' },
+  { category: 'Other AI Content', title: 'AI Content Sample 03', id: '1K1DFWAnZ6ifZrtXiYv95tRFzKMjXIZrl' },
+  { category: 'Other AI Content', title: 'AI Content Sample 04', id: '1H8zPxAMiXuP7tY8Gu1qPlxqbZTfUiZGf' },
+  { category: 'Other AI Content', title: 'AI Content Sample 05', id: '1lehYeYhwOZjUdCGYoN72kRvkr5HGBq7v' }
 ];
 
 const categoryOrder = ['VSL', 'UGC', 'Pixar Style', 'Animation', 'Other AI Content'];
@@ -36,6 +36,7 @@ const tools = [
   ['Google Flow / Veo', Film], ['ChatGPT Image', Sparkles],
   ['Nano Banana / Gemini', WandSparkles], ['CapCut', Scissors], ['ElevenLabs', Volume2]
 ];
+const previewUrl = id => `https://drive.google.com/file/d/${id}/preview?autoplay=1&mute=1`;
 const viewUrl = id => `https://drive.google.com/file/d/${id}/view`;
 
 function useReveal() {
@@ -93,7 +94,7 @@ function VideoCard({ video, index }) {
         setMounted(true);
         io.disconnect();
       }
-    }, { rootMargin: '700px 0px', threshold: 0.01 });
+    }, { rootMargin: '500px 0px', threshold: 0.01 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -113,24 +114,22 @@ function VideoCard({ video, index }) {
     el.style.setProperty('--ry', '0deg');
   };
 
-  const drivePreview = `https://drive.google.com/file/d/${video.id}/preview?autoplay=1&mute=1`;
-
   return (
     <article className="video-card reveal-card" ref={cardRef} onMouseMove={onMove} onMouseLeave={reset}
       style={{ '--delay': `${Math.min(index * 55, 220)}ms` }} data-reveal>
       <div className="video-frame" ref={playerRef}>
         {mounted ? (
           <iframe
-            src={drivePreview}
+            src={previewUrl(video.id)}
             title={video.title}
-            allow="autoplay; fullscreen; picture-in-picture"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             loading="eager"
           />
         ) : (
-          <div className="video-loading"><Play size={24} fill="currentColor"/><span>Loading preview…</span></div>
+          <div className="video-loading"><Play size={24} fill="currentColor"/><span>Loading video…</span></div>
         )}
-        <div className="inline-note"><span className="live-dot"/> AUTOPLAY · MUTED</div>
+        <div className="inline-note"><span className="live-dot"/> AUTO PLAY · MUTED</div>
       </div>
       <div className="video-meta">
         <div><span>{video.category}</span><h3>{video.title}</h3></div>
@@ -139,7 +138,6 @@ function VideoCard({ video, index }) {
     </article>
   );
 }
-
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'dark');
   useReveal();
@@ -172,7 +170,6 @@ function App() {
             <button className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Toggle color theme">
               {theme === 'dark' ? <Sun size={17}/> : <Moon size={17}/>}<span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
             </button>
-            <a className="nav-cta" href={DRIVE_FOLDER} target="_blank" rel="noreferrer">Drive <ArrowUpRight size={14}/></a>
           </div>
         </nav>
       </header>
@@ -300,6 +297,10 @@ function App() {
             <a href="https://t.me/Skwkekdkd" target="_blank" rel="noreferrer">@Skwkekdkd</a>
           </div>
           <div className="location"><MapPin size={14}/> Quezon City, Philippines</div>
+          <a className="full-portfolio-cta" href={FULL_PORTFOLIO} target="_blank" rel="noreferrer">
+            <span><small>MORE PROJECTS & COMPLETE ARCHIVE</small><strong>View My Full Portfolio</strong></span>
+            <ArrowUpRight size={24}/>
+          </a>
         </div>
       </section>
 
